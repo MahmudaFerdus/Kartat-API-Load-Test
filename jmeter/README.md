@@ -95,12 +95,13 @@ Profiles:
 
 | product_id | bundle_id | name |
 | --- | --- | --- |
-| 1 | 9 | Bundle |
-| 1 | 57 | Bundle |
-| 1 | 60 | Bundle |
-| 1 | 3 | Bundle |
-| 1 | 59 | Bundle |
-| 4 | 6 | Bundle |
-| 4 | 7 | Bundle |
+| 116 | 1082 | Bundle |
+| 116 | 1083 | Bundle |
+| 125 | 1089 | Bundle |
+| 125 | 1088 | Bundle |
+| 131 | 1068 | Bundle |
+| 131 | 1067 | Bundle |
+| 105 | 1072 | Bundle |
+| 124 | 1052 | Bundle |
 
 The sheet has no `msisdn` column, so every row uses `9647706055187` (the `asiacellMsisdn` default). `sip` is `0662981885` and `dealer_number` is `ABC123`. Override them with `-JasiacellMsisdn`, `-Jsip`, and `-Jdealer_number`.
