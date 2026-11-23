@@ -1,9 +1,8 @@
-# operator_id,bundle_id,product_name,bundle_name,msisdn
-# Add a row only when both ids appear in the Kartat collection or GATEWAY.CD.DEV environment.
-operator_id,bundle_id,product_name,bundle_name,msisdn
-101,1001,Amazon Gift Card,Amazon - $10 US,9647706055187
-101,1015,Amazon Gift Card,Amazon - 30$,9647706055187
-101,1016,Amazon Gift Card,Amazon - 25$,9647706055187
-101,1017,Amazon Gift Card,Amazon - 20$,9647706055187
-101,1003,Amazon Gift Card,GATEWAY.CD.DEV bundleId,9647706055187
-106,1025,Newroz,purchase execute example,9647706055187
+product_id,bundle_id,name
+1,9,Bundle
+1,57,Bundle
+1,60,Bundle
+1,3,Bundle
+1,59,Bundle
+4,6,Bundle
+4,7,Bundle

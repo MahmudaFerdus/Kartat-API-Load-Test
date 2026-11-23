@@ -91,19 +91,16 @@ Profiles:
 
 ## Catalog rows
 
-`data/products.csv` is the round-robin list. Both ids on a row appear in the Kartat gateway collection or the GATEWAY.CD.DEV environment. Add further rows the same way; do not invent ids.
+`data/products.csv` is the round-robin list. Each purchase attempt takes the next row for both validate and execute. `product_id` is sent as `operator_id`. `bundle_id` is sent as `bundle_id`.
 
-| operator_id | product | bundle_id | bundle | Where it appears |
-| --- | --- | --- | --- | --- |
-| 101 | Amazon Gift Card | 1001 | Amazon - $10 US | Bundle list and purchase examples |
-| 101 | Amazon Gift Card | 1015 | Amazon - 30$ | Bundle list for operator 101 |
-| 101 | Amazon Gift Card | 1016 | Amazon - 25$ | Bundle list for operator 101 |
-| 101 | Amazon Gift Card | 1017 | Amazon - 20$ | Bundle list for operator 101 |
-| 101 | Amazon Gift Card | 1003 | GATEWAY.CD.DEV bundleId | Environment `operatorId` and `bundleId` (the collection list does not name this bundle) |
-| 106 | Newroz | 1025 | purchase execute example | Execute example that pairs these two ids |
+| product_id | bundle_id | name |
+| --- | --- | --- |
+| 1 | 9 | Bundle |
+| 1 | 57 | Bundle |
+| 1 | 60 | Bundle |
+| 1 | 3 | Bundle |
+| 1 | 59 | Bundle |
+| 4 | 6 | Bundle |
+| 4 | 7 | Bundle |
 
-Operator 116 (Korek) is in the operator list, and the operator-info request uses 116. No bundle id is recorded for it. Bundle id 1082 does not appear in the collection or the environment, so there is no 116/1082 row.
-
-These operators are in the collection and have no bundle id there, so they are not rows yet: 102 Apple Giftcard, 103 FTTH, 104 TKTATIK, 105 Fastlink, 107 Playstation, 108 Spider Man, 109 Xbox Live Gold, 110 Play station Network Card Global, 111 Hulu Plus Gift Card (US), 112 CALL OF DUTY (COD), 113 PUBG (PC), 114 Amazon Gift Card US, 115 Test, 117 Apple (MintRoute).
-
-`msisdn` uses `9647706055187`, the first number in the enabled validate/execute `msisdn` description (`asiacellMsisdn` is not defined in the environment). `sip` is `0662981885` and `dealer_number` is `ABC123`, the enabled form values. Change them per row in the CSV (`msisdn`) or with `-Jsip` and `-Jdealer_number`.
+The sheet has no `msisdn` column, so every row uses `9647706055187` (the `asiacellMsisdn` default). `sip` is `0662981885` and `dealer_number` is `ABC123`. Override them with `-JasiacellMsisdn`, `-Jsip`, and `-Jdealer_number`.

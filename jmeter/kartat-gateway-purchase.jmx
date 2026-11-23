@@ -527,12 +527,13 @@ try {
                     header.eachWithIndex { column, index -&gt;
                         map[column] = index &lt; cols.size() ? cols[index] : ""
                     }
-                    def operatorId = (map.operator_id ?: "").toString()
+                    def productId = (map.product_id ?: map.operator_id ?: "").toString()
                     def bundleId = (map.bundle_id ?: "").toString()
-                    if (operatorId ==~ /[0-9]+/ &amp;&amp; bundleId ==~ /[0-9]+/) {
+                    if (productId ==~ /[0-9]+/ &amp;&amp; bundleId ==~ /[0-9]+/) {
+                        map.product_id = productId
                         parsed.add(map)
                     } else {
-                        log.warn("Skipping products.csv row because operator_id and bundle_id must both be numeric")
+                        log.warn("Skipping products.csv row because product_id and bundle_id must both be numeric")
                     }
                 }
             }
@@ -550,10 +551,11 @@ try {
             if (!msisdn) {
                 msisdn = propOrVar("asiacellMsisdn", "9647706055187")
             }
-            vars.put("operator_id", row.operator_id.toString())
+            vars.put("operator_id", (row.product_id ?: row.operator_id).toString())
             vars.put("bundle_id", row.bundle_id.toString())
-            vars.put("product_name", (row.product_name ?: "").toString())
-            vars.put("bundle_name", (row.bundle_name ?: "").toString())
+            def rowName = (row.name ?: row.bundle_name ?: row.product_name ?: "").toString()
+            vars.put("product_name", (row.product_name ?: rowName).toString())
+            vars.put("bundle_name", rowName)
             vars.put("msisdn", msisdn)
         }
     }
