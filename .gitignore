@@ -1,0 +1,4 @@
+secrets.properties
+results/
+*.jtl
+jmeter.log

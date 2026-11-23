@@ -1,0 +1,882 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Kartat gateway purchase" enabled="true">
+      <stringProp name="TestPlan.comments">Kartat gateway purchase flow for GATEWAY.CD.DEV. Fixed shape spaces totalPurchases attempts across duration seconds. Open shape (loadShape=open) repeats validate/execute until duration ends. Credentials stay in secrets.properties or -J properties and are not stored in this file. Login is once per thread. Each attempt validates, then executes only when validate returns status true.</stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="Accept JSON" enabled="true">
+        <collectionProp name="HeaderManager.headers">
+          <elementProp name="" elementType="Header">
+            <stringProp name="Header.name">Accept</stringProp>
+            <stringProp name="Header.value">application/json</stringProp>
+          </elementProp>
+        </collectionProp>
+      </HeaderManager>
+      <hashTree/>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="base_url" elementType="Argument">
+            <stringProp name="Argument.name">base_url</stringProp>
+            <stringProp name="Argument.value">${__P(base_url,https://dev-apigw.cardselling.cash)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="loadShape" elementType="Argument">
+            <stringProp name="Argument.name">loadShape</stringProp>
+            <stringProp name="Argument.value">${__P(loadShape,fixed)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="totalPurchases" elementType="Argument">
+            <stringProp name="Argument.name">totalPurchases</stringProp>
+            <stringProp name="Argument.value">${__P(totalPurchases,180)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="duration" elementType="Argument">
+            <stringProp name="Argument.name">duration</stringProp>
+            <stringProp name="Argument.value">${__P(duration,60)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="drainSeconds" elementType="Argument">
+            <stringProp name="Argument.name">drainSeconds</stringProp>
+            <stringProp name="Argument.value">${__P(drainSeconds,30)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="num_threads" elementType="Argument">
+            <stringProp name="Argument.name">num_threads</stringProp>
+            <stringProp name="Argument.value">${__P(num_threads,30)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="ramp_time" elementType="Argument">
+            <stringProp name="Argument.name">ramp_time</stringProp>
+            <stringProp name="Argument.value">${__P(ramp_time,5)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="qty" elementType="Argument">
+            <stringProp name="Argument.name">qty</stringProp>
+            <stringProp name="Argument.value">${__P(qty,1)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="sip" elementType="Argument">
+            <stringProp name="Argument.name">sip</stringProp>
+            <stringProp name="Argument.value">${__P(sip,0662981885)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="dealer_number" elementType="Argument">
+            <stringProp name="Argument.name">dealer_number</stringProp>
+            <stringProp name="Argument.value">${__P(dealer_number,ABC123)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="asiacellMsisdn" elementType="Argument">
+            <stringProp name="Argument.name">asiacellMsisdn</stringProp>
+            <stringProp name="Argument.value">${__P(asiacellMsisdn,9647706055187)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="connectTimeoutMs" elementType="Argument">
+            <stringProp name="Argument.name">connectTimeoutMs</stringProp>
+            <stringProp name="Argument.value">${__P(connectTimeoutMs,3000)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="responseTimeoutMs" elementType="Argument">
+            <stringProp name="Argument.name">responseTimeoutMs</stringProp>
+            <stringProp name="Argument.value">${__P(responseTimeoutMs,50000)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="resellerCsv" elementType="Argument">
+            <stringProp name="Argument.name">resellerCsv</stringProp>
+            <stringProp name="Argument.value">${__P(resellerCsv,data/reseller.csv)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="productsCsv" elementType="Argument">
+            <stringProp name="Argument.name">productsCsv</stringProp>
+            <stringProp name="Argument.value">${__P(productsCsv,data/products.csv)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="secretsFile" elementType="Argument">
+            <stringProp name="Argument.name">secretsFile</stringProp>
+            <stringProp name="Argument.value">${__P(secretsFile,secrets.properties)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="enablePurchaseThrottle" elementType="Argument">
+            <stringProp name="Argument.name">enablePurchaseThrottle</stringProp>
+            <stringProp name="Argument.value">${__P(enablePurchaseThrottle,false)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="targetPurchaseTps" elementType="Argument">
+            <stringProp name="Argument.name">targetPurchaseTps</stringProp>
+            <stringProp name="Argument.value">${__P(targetPurchaseTps,3)}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
+      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="Load secrets" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">0</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </SetupThreadGroup>
+      <hashTree>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Read secrets.properties" enabled="true">
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">import java.net.URI
+import org.apache.jmeter.services.FileServer
+
+def baseDir = new File(FileServer.getFileServer().getBaseDir() ?: ".")
+def secretsName = (props.get("secretsFile") ?: vars.get("secretsFile") ?: "secrets.properties").toString().trim()
+if (!secretsName) {
+    secretsName = "secrets.properties"
+}
+def secrets = new File(secretsName)
+if (!secrets.isAbsolute()) {
+    secrets = new File(baseDir, secretsName)
+}
+
+int filled = 0
+if (secrets.isFile()) {
+    secrets.eachLine("UTF-8") { line -&gt;
+        def raw = line.replace("\uFEFF", "").trim()
+        if (!raw || raw.startsWith("#") || raw.startsWith("!")) {
+            return
+        }
+        def eq = raw.indexOf("=")
+        if (eq &lt; 1) {
+            return
+        }
+        def key = raw.substring(0, eq).trim()
+        def value = raw.substring(eq + 1).trim()
+        def existing = props.get(key)
+        if (key &amp;&amp; (existing == null || existing.toString().trim().isEmpty())) {
+            props.put(key, value)
+            filled++
+        }
+    }
+    log.info("Secrets file " + secrets.getName() + " filled " + filled + " empty properties. Existing -J and -q values were kept.")
+} else {
+    log.warn("Secrets file not found at " + secrets.getAbsolutePath())
+}
+
+def missing = ["client_id", "client_secret", "password"].findAll { key -&gt;
+    def value = props.get(key)
+    value == null || value.toString().trim().isEmpty()
+}
+missing.each { key -&gt;
+    log.error("Missing " + key + ". Put it in secrets.properties or pass -J" + key + " without printing the value.")
+}
+
+def rawBase = props.get("base_url")
+if (rawBase == null || rawBase.toString().trim().isEmpty()) {
+    rawBase = vars.get("base_url")
+}
+if (rawBase == null || rawBase.toString().trim().isEmpty()) {
+    rawBase = "https://dev-apigw.cardselling.cash"
+}
+def baseUrl = rawBase.toString().trim()
+while (baseUrl.endsWith("/")) {
+    baseUrl = baseUrl.substring(0, baseUrl.length() - 1)
+}
+def uri = new URI(baseUrl)
+if (!uri.scheme || !uri.host) {
+    throw new IllegalStateException("base_url must be an absolute http or https URL")
+}
+props.put("base_url", baseUrl)
+props.put("kartat_scheme", uri.scheme)
+props.put("kartat_host", uri.host)
+props.put("kartat_port", uri.port &gt; 0 ? String.valueOf(uri.port) : "")
+log.info("Gateway host " + uri.scheme + "://" + uri.host + (uri.port &gt; 0 ? ":" + uri.port : ""))
+
+if (props.get("threadGroupDuration") == null || props.get("threadGroupDuration").toString().trim().isEmpty()) {
+    def shape = props.get("loadShape")
+    if (shape == null || shape.toString().trim().isEmpty()) {
+        shape = vars.get("loadShape") ?: "fixed"
+    }
+    def duration = props.get("duration")
+    if (duration == null || duration.toString().trim().isEmpty()) {
+        duration = vars.get("duration") ?: "60"
+    }
+    def drain = props.get("drainSeconds")
+    if (drain == null || drain.toString().trim().isEmpty()) {
+        drain = vars.get("drainSeconds") ?: "30"
+    }
+    int window = Integer.parseInt(duration.toString().trim())
+    int extra = Integer.parseInt(drain.toString().trim())
+    int scheduled = shape.toString().equalsIgnoreCase("open") ? window : window + extra
+    props.put("threadGroupDuration", String.valueOf(scheduled))
+    log.info("threadGroupDuration=" + scheduled + " for loadShape=" + shape)
+}
+
+SampleResult.setResponseCode(missing.isEmpty() ? "200" : "500")
+SampleResult.setSuccessful(missing.isEmpty())
+SampleResult.setResponseMessage(missing.isEmpty() ? "secrets ready" : ("missing " + missing.join(",")))
+SampleResult.setResponseData("credential values are not stored in this sample", "UTF-8")</stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223Sampler>
+        <hashTree/>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Purchase workers" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <stringProp name="LoopController.loops">-1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">${num_threads}</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">${ramp_time}</stringProp>
+        <boolProp name="ThreadGroup.scheduler">true</boolProp>
+        <stringProp name="ThreadGroup.duration">${__P(threadGroupDuration,90)}</stringProp>
+        <stringProp name="ThreadGroup.delay">0</stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Reseller" enabled="true">
+          <stringProp name="delimiter">,</stringProp>
+          <stringProp name="fileEncoding">UTF-8</stringProp>
+          <stringProp name="filename">${resellerCsv}</stringProp>
+          <boolProp name="ignoreFirstLine">true</boolProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">true</boolProp>
+          <stringProp name="shareMode">shareMode.all</stringProp>
+          <boolProp name="stopThread">false</boolProp>
+          <stringProp name="variableNames">username</stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <OnceOnlyController guiclass="OnceOnlyControllerGui" testclass="OnceOnlyController" testname="Log in once" enabled="true"/>
+        <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="oauth/token" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="grant_type" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.name">grant_type</stringProp>
+                <stringProp name="Argument.value">password</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+              </elementProp>
+              <elementProp name="client_id" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.name">client_id</stringProp>
+                <stringProp name="Argument.value">${__P(client_id)}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+              </elementProp>
+              <elementProp name="client_secret" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.name">client_secret</stringProp>
+                <stringProp name="Argument.value">${__P(client_secret)}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+              </elementProp>
+              <elementProp name="username" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.name">username</stringProp>
+                <stringProp name="Argument.value">${username}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+              </elementProp>
+              <elementProp name="password" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.name">password</stringProp>
+                <stringProp name="Argument.value">${__P(password)}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+              </elementProp>
+              <elementProp name="scope" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.name">scope</stringProp>
+                <stringProp name="Argument.value">*</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${__P(kartat_host,dev-apigw.cardselling.cash)}</stringProp>
+          <stringProp name="HTTPSampler.port">${__P(kartat_port,)}</stringProp>
+          <stringProp name="HTTPSampler.protocol">${__P(kartat_scheme,https)}</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+          <stringProp name="HTTPSampler.path">/oauth/token</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">true</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout">${connectTimeoutMs}</stringProp>
+          <stringProp name="HTTPSampler.response_timeout">${responseTimeoutMs}</stringProp>
+        </HTTPSamplerProxy>
+          <hashTree>
+            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="Extract access_token" enabled="true">
+              <stringProp name="JSONPostProcessor.referenceNames">access_token</stringProp>
+              <stringProp name="JSONPostProcessor.jsonPathExprs">$.access_token</stringProp>
+              <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+              <stringProp name="JSONPostProcessor.defaultValues">NOT_FOUND</stringProp>
+            </JSONPostProcessor>
+            <hashTree/>
+        <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Require access_token" enabled="true">
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">def token = vars.get("access_token")
+if (token == null || token.trim().isEmpty() || "NOT_FOUND".equals(token)) {
+    prev.setSuccessful(false)
+    prev.setResponseMessage("oauth/token response did not include access_token")
+    prev.setStopThread(true)
+}</stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223PostProcessor>
+            <hashTree/>
+          </hashTree>
+        </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If access token" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def t = vars.get("access_token"); t != null &amp;&amp; !"NOT_FOUND".equals(t) &amp;&amp; t.trim().length() &gt; 0)}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+        <hashTree>
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Schedule purchase" enabled="true">
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">import org.apache.jmeter.services.FileServer
+
+def propOrVar = { String key, String fallback -&gt;
+    def fromProp = props.get(key)
+    if (fromProp != null &amp;&amp; fromProp.toString().trim()) {
+        return fromProp.toString().trim()
+    }
+    def fromVar = vars.get(key)
+    if (fromVar != null &amp;&amp; fromVar.toString().trim()) {
+        return fromVar.toString().trim()
+    }
+    return fallback
+}
+
+def shape = propOrVar("loadShape", "fixed").toLowerCase()
+if (!"open".equals(shape)) {
+    shape = "fixed"
+}
+def runId = (props.get("TESTSTART.MS") ?: "0").toString()
+vars.put("skipPurchase", "true")
+
+int total
+def totalProp = props.get("totalPurchases")
+if (totalProp != null &amp;&amp; totalProp.toString().trim()) {
+    total = Integer.parseInt(totalProp.toString().trim())
+} else if ("fixed".equals(shape)) {
+    def fromVar = vars.get("totalPurchases")
+    total = (fromVar != null &amp;&amp; fromVar.toString().trim()) ? Integer.parseInt(fromVar.toString().trim()) : 180
+} else {
+    total = 0
+}
+long duration = Long.parseLong(propOrVar("duration", "fixed".equals(shape) ? "60" : "300"))
+if (duration &lt; 1L) {
+    duration = 1L
+}
+
+class KartatFixedSchedule {
+    static final Object LOCK = new Object()
+    static String runId = ""
+    static long startMs = 0L
+    static int issued = 0
+}
+class KartatOpenCap {
+    static final Object LOCK = new Object()
+    static String runId = ""
+    static int issued = 0
+}
+class KartatProductCatalog {
+    static final Object LOCK = new Object()
+    static String runId = ""
+    static String loadedFrom = ""
+    static List rows = []
+    static int next = 0
+}
+class KartatPurchaseThrottle {
+    static final Object LOCK = new Object()
+    static String runId = ""
+    static long nextAllowedMs = 0L
+}
+
+def finishSchedule = {
+    SampleResult.setSuccessful(true)
+    SampleResult.setResponseCode("200")
+    SampleResult.setResponseMessage("purchase schedule complete")
+    SampleResult.setIgnore()
+    SampleResult.setStopThread(true)
+}
+
+try {
+    if ("fixed".equals(shape)) {
+        if (total &lt; 1) {
+            throw new IllegalStateException("fixed load requires totalPurchases &gt;= 1")
+        }
+        int slot = 0
+        long target = 0L
+        synchronized (KartatFixedSchedule.LOCK) {
+            if (!runId.equals(KartatFixedSchedule.runId)) {
+                KartatFixedSchedule.runId = runId
+                KartatFixedSchedule.startMs = 0L
+                KartatFixedSchedule.issued = 0
+            }
+            if (KartatFixedSchedule.startMs == 0L) {
+                KartatFixedSchedule.startMs = System.currentTimeMillis()
+            }
+            KartatFixedSchedule.issued++
+            slot = KartatFixedSchedule.issued
+            if (slot &lt;= total) {
+                double intervalMs = (duration * 1000.0d) / total
+                target = KartatFixedSchedule.startMs + Math.round((slot - 1) * intervalMs)
+            }
+        }
+        if (slot &gt; total) {
+            finishSchedule()
+            return null
+        }
+        long waitMs = target - System.currentTimeMillis()
+        if (waitMs &gt; 0L) {
+            Thread.sleep(waitMs)
+        }
+        vars.put("purchaseSlot", String.valueOf(slot))
+    } else {
+        if (total &gt; 0) {
+            int slot = 0
+            synchronized (KartatOpenCap.LOCK) {
+                if (!runId.equals(KartatOpenCap.runId)) {
+                    KartatOpenCap.runId = runId
+                    KartatOpenCap.issued = 0
+                }
+                KartatOpenCap.issued++
+                slot = KartatOpenCap.issued
+            }
+            if (slot &gt; total) {
+                finishSchedule()
+                return null
+            }
+            vars.put("purchaseSlot", String.valueOf(slot))
+        }
+        if ("true".equalsIgnoreCase(propOrVar("enablePurchaseThrottle", "false"))) {
+            double tps = Double.parseDouble(propOrVar("targetPurchaseTps", "3"))
+            if (tps &gt; 0d) {
+                long waitMs = 0L
+                synchronized (KartatPurchaseThrottle.LOCK) {
+                    if (!runId.equals(KartatPurchaseThrottle.runId)) {
+                        KartatPurchaseThrottle.runId = runId
+                        KartatPurchaseThrottle.nextAllowedMs = 0L
+                    }
+                    long intervalMs = Math.max(1L, (long) (1000.0d / tps))
+                    long now = System.currentTimeMillis()
+                    long scheduled = KartatPurchaseThrottle.nextAllowedMs
+                    if (scheduled == 0L || now - scheduled &gt; intervalMs * 5L) {
+                        scheduled = now
+                    }
+                    if (now &lt; scheduled) {
+                        waitMs = scheduled - now
+                        KartatPurchaseThrottle.nextAllowedMs = scheduled + intervalMs
+                    } else {
+                        KartatPurchaseThrottle.nextAllowedMs = now + intervalMs
+                    }
+                }
+                if (waitMs &gt; 0L) {
+                    Thread.sleep(waitMs)
+                }
+            }
+        }
+    }
+
+    if (!runId.equals(props.get("kartatScheduleLoggedRun"))) {
+        props.put("kartatScheduleLoggedRun", runId)
+        log.info("Purchase schedule shape=" + shape + " totalPurchases=" + total + " durationSec=" + duration)
+    }
+
+    def csvProp = propOrVar("productsCsv", "data/products.csv")
+    def csvFile = new File(csvProp)
+    if (!csvFile.isAbsolute()) {
+        csvFile = new File(FileServer.getFileServer().getBaseDir() ?: ".", csvProp)
+    }
+    List rows
+    synchronized (KartatProductCatalog.LOCK) {
+        if (!runId.equals(KartatProductCatalog.runId) || !csvFile.getAbsolutePath().equals(KartatProductCatalog.loadedFrom)) {
+            def parsed = []
+            if (csvFile.isFile()) {
+                def header = null
+                csvFile.eachLine("UTF-8") { line -&gt;
+                    def raw = line.replace("\uFEFF", "").trim()
+                    if (!raw || raw.startsWith("#")) {
+                        return
+                    }
+                    def cols = raw.split(",", -1).collect { it.trim() }
+                    if (header == null) {
+                        header = cols
+                        return
+                    }
+                    def map = [:]
+                    header.eachWithIndex { column, index -&gt;
+                        map[column] = index &lt; cols.size() ? cols[index] : ""
+                    }
+                    def productId = (map.product_id ?: map.operator_id ?: "").toString()
+                    def bundleId = (map.bundle_id ?: "").toString()
+                    if (productId ==~ /[0-9]+/ &amp;&amp; bundleId ==~ /[0-9]+/) {
+                        map.product_id = productId
+                        parsed.add(map)
+                    } else {
+                        log.warn("Skipping products.csv row because product_id and bundle_id must both be numeric")
+                    }
+                }
+            }
+            KartatProductCatalog.rows = parsed
+            KartatProductCatalog.next = 0
+            KartatProductCatalog.runId = runId
+            KartatProductCatalog.loadedFrom = csvFile.getAbsolutePath()
+            log.info("Loaded " + parsed.size() + " product rows from " + csvFile.getName())
+        }
+        rows = KartatProductCatalog.rows
+        if (rows != null &amp;&amp; !rows.isEmpty()) {
+            def row = rows[KartatProductCatalog.next % rows.size()]
+            KartatProductCatalog.next++
+            def msisdn = (row.msisdn ?: "").toString().trim()
+            if (!msisdn) {
+                msisdn = propOrVar("asiacellMsisdn", "9647706055187")
+            }
+            vars.put("operator_id", (row.product_id ?: row.operator_id).toString())
+            vars.put("bundle_id", row.bundle_id.toString())
+            def rowName = (row.name ?: row.bundle_name ?: row.product_name ?: "").toString()
+            vars.put("product_name", (row.product_name ?: rowName).toString())
+            vars.put("bundle_name", rowName)
+            vars.put("msisdn", msisdn)
+        }
+    }
+    if (rows == null || rows.isEmpty()) {
+        throw new IllegalStateException("No product rows in " + csvFile.getAbsolutePath())
+    }
+
+    vars.put("skipPurchase", "false")
+    SampleResult.setSuccessful(true)
+    SampleResult.setResponseCode("200")
+    SampleResult.setResponseMessage("scheduled")
+    SampleResult.setIgnore()
+} catch (InterruptedException interrupted) {
+    Thread.currentThread().interrupt()
+    vars.put("skipPurchase", "true")
+    SampleResult.setIgnore()
+    SampleResult.setStopThread(true)
+} catch (Exception error) {
+    vars.put("skipPurchase", "true")
+    SampleResult.setSuccessful(false)
+    SampleResult.setResponseCode("500")
+    SampleResult.setResponseMessage(error.getClass().getSimpleName() + ": " + error.getMessage())
+    SampleResult.setStopThread(true)
+}
+return null</stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223Sampler>
+          <hashTree/>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If purchase slot reserved" enabled="true">
+          <stringProp name="IfController.condition">${__groovy("false".equals(vars.get("skipPurchase")))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+          <hashTree>
+            <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="purchase ${operator_id}-${bundle_id}" enabled="true">
+              <boolProp name="TransactionController.includeTimers">false</boolProp>
+              <boolProp name="TransactionController.parent">true</boolProp>
+            </TransactionController>
+            <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="purchase validate ${operator_id}-${bundle_id}" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="bundle_id" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.name">bundle_id</stringProp>
+                <stringProp name="Argument.value">${bundle_id}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+              </elementProp>
+              <elementProp name="qty" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.name">qty</stringProp>
+                <stringProp name="Argument.value">${qty}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+              </elementProp>
+              <elementProp name="operator_id" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.name">operator_id</stringProp>
+                <stringProp name="Argument.value">${operator_id}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+              </elementProp>
+              <elementProp name="sip" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.name">sip</stringProp>
+                <stringProp name="Argument.value">${sip}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+              </elementProp>
+              <elementProp name="msisdn" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.name">msisdn</stringProp>
+                <stringProp name="Argument.value">${msisdn}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+              </elementProp>
+              <elementProp name="dealer_number" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.name">dealer_number</stringProp>
+                <stringProp name="Argument.value">${dealer_number}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${__P(kartat_host,dev-apigw.cardselling.cash)}</stringProp>
+          <stringProp name="HTTPSampler.port">${__P(kartat_port,)}</stringProp>
+          <stringProp name="HTTPSampler.protocol">${__P(kartat_scheme,https)}</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+          <stringProp name="HTTPSampler.path">/api/v1/stock/purchase/validate</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">true</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout">${connectTimeoutMs}</stringProp>
+          <stringProp name="HTTPSampler.response_timeout">${responseTimeoutMs}</stringProp>
+        </HTTPSamplerProxy>
+              <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="Authorization" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Authorization</stringProp>
+                <stringProp name="Header.value">Bearer ${access_token}</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+        <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Read validate status" enabled="true">
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">vars.put("validateOk", "false")
+try {
+    def text = prev.getResponseDataAsString()
+    if (text != null &amp;&amp; text.trim().startsWith("{")) {
+        def body = new groovy.json.JsonSlurper().parseText(text)
+        def status = body instanceof Map ? body.get("status") : null
+        if (Boolean.TRUE.equals(status) || "true".equalsIgnoreCase(String.valueOf(status))) {
+            vars.put("validateOk", "true")
+        }
+    }
+} catch (Exception ignored) {
+    vars.put("validateOk", "false")
+}
+if (!"true".equals(vars.get("validateOk"))) {
+    prev.setSuccessful(false)
+}</stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223PostProcessor>
+                <hashTree/>
+              </hashTree>
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If validate status true" enabled="true">
+          <stringProp name="IfController.condition">${__groovy("true".equals(vars.get("validateOk")))}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
+              <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="purchase execute ${operator_id}-${bundle_id}" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="bundle_id" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.name">bundle_id</stringProp>
+                <stringProp name="Argument.value">${bundle_id}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+              </elementProp>
+              <elementProp name="qty" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.name">qty</stringProp>
+                <stringProp name="Argument.value">${qty}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+              </elementProp>
+              <elementProp name="transaction_id" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.name">transaction_id</stringProp>
+                <stringProp name="Argument.value">${__RandomString(8,abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789)}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+              </elementProp>
+              <elementProp name="operator_id" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.name">operator_id</stringProp>
+                <stringProp name="Argument.value">${operator_id}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+              </elementProp>
+              <elementProp name="delivery_in_response" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.name">delivery_in_response</stringProp>
+                <stringProp name="Argument.value">1</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+              </elementProp>
+              <elementProp name="msisdn" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.name">msisdn</stringProp>
+                <stringProp name="Argument.value">${msisdn}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+              </elementProp>
+              <elementProp name="dealer_number" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.name">dealer_number</stringProp>
+                <stringProp name="Argument.value">${dealer_number}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain">${__P(kartat_host,dev-apigw.cardselling.cash)}</stringProp>
+          <stringProp name="HTTPSampler.port">${__P(kartat_port,)}</stringProp>
+          <stringProp name="HTTPSampler.protocol">${__P(kartat_scheme,https)}</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding">UTF-8</stringProp>
+          <stringProp name="HTTPSampler.path">/api/v1/stock/purchase/execute</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">true</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout">${connectTimeoutMs}</stringProp>
+          <stringProp name="HTTPSampler.response_timeout">${responseTimeoutMs}</stringProp>
+        </HTTPSamplerProxy>
+                <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="Authorization" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Authorization</stringProp>
+                <stringProp name="Header.value">Bearer ${access_token}</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+        <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Read execute status" enabled="true">
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="filename"></stringProp>
+          <stringProp name="parameters"></stringProp>
+          <stringProp name="script">def ok = false
+try {
+    def text = prev.getResponseDataAsString()
+    if (text != null &amp;&amp; text.trim().startsWith("{")) {
+        def body = new groovy.json.JsonSlurper().parseText(text)
+        def status = body instanceof Map ? body.get("status") : null
+        ok = Boolean.TRUE.equals(status) || "true".equalsIgnoreCase(String.valueOf(status))
+    }
+} catch (Exception ignored) {
+    ok = false
+}
+if (!ok) {
+    prev.setSuccessful(false)
+}</stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223PostProcessor>
+                  <hashTree/>
+                </hashTree>
+              </hashTree>
+            </hashTree>
+          </hashTree>
+        </hashTree>
+      </hashTree>
+      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="false">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>

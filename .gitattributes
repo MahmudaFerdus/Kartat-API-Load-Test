@@ -1,0 +1,5 @@
+*.cmd text eol=crlf
+*.sh text eol=lf
+*.jmx text eol=lf
+*.properties text eol=lf
+*.csv text eol=lf
