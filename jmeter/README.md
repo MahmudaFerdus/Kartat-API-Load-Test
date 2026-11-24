@@ -99,9 +99,7 @@ Profiles:
 | 116 | 1083 | Bundle |
 | 125 | 1089 | Bundle |
 | 125 | 1088 | Bundle |
-| 131 | 1068 | Bundle |
-| 131 | 1067 | Bundle |
-| 105 | 1072 | Bundle |
-| 124 | 1052 | Bundle |
+| 116 | 1074 | Bundle |
+| 125 | 1084 | Bundle |
 
 The sheet has no `msisdn` column, so every row uses `9647706055187` (the `asiacellMsisdn` default). `sip` is `0662981885` and `dealer_number` is `ABC123`. Override them with `-JasiacellMsisdn`, `-Jsip`, and `-Jdealer_number`.
