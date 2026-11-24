@@ -158,9 +158,49 @@ def analyze_bottlenecks(stats):
 
     return findings
 
+def ensure_dashboard(results_dir, jtl_file, stats_json):
+    if os.path.isfile(stats_json):
+        return
+    if not os.path.isfile(jtl_file) or os.path.getsize(jtl_file) == 0:
+        return
+    # Fix potential truncated last line from SIGINT / Ctrl+C
+    try:
+        with open(jtl_file, 'rb+') as f:
+            lines = f.readlines()
+            if lines and not lines[-1].endswith(b'\n'):
+                f.seek(0)
+                f.writelines(lines[:-1])
+                f.truncate()
+    except Exception:
+        pass
+
+    # Try generating dashboard using jmeter CLI if available
+    dashboard_dir = os.path.join(results_dir, 'dashboard')
+    import shutil, subprocess
+    jmeter_bin = shutil.which('jmeter') or os.environ.get('JMETER')
+    if not jmeter_bin:
+        for candidate in [
+            os.path.expanduser('~/apache-jmeter-5.6.3/bin/jmeter'),
+            '/opt/homebrew/bin/jmeter',
+            '/usr/local/bin/jmeter'
+        ]:
+            if os.path.isfile(candidate) and os.access(candidate, os.X_OK):
+                jmeter_bin = candidate
+                break
+    if jmeter_bin:
+        if os.path.isdir(dashboard_dir):
+            shutil.rmtree(dashboard_dir, ignore_errors=True)
+        try:
+            subprocess.run([jmeter_bin, '-g', jtl_file, '-o', dashboard_dir],
+                           stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False)
+        except Exception:
+            pass
+
 def generate_report(results_dir):
     stats_json = os.path.join(results_dir, 'dashboard', 'statistics.json')
     jtl_file = os.path.join(results_dir, 'results.jtl')
+
+    ensure_dashboard(results_dir, jtl_file, stats_json)
 
     if os.path.isfile(stats_json):
         stats = parse_from_statistics_json(stats_json)

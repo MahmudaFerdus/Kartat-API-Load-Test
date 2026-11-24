@@ -286,6 +286,46 @@ if (!missing.isEmpty()) {
     try {
         org.apache.jmeter.threads.JMeterContextService.getContext().getEngine().stopTest(true)
     } catch (Throwable ignored) {}
+} else {
+    // Pre-fetch shared OAuth token once so worker threads do not stampede /oauth/token
+    try {
+        def base = props.get("base_url") ?: "https://dev-apigw.cardselling.cash"
+        def cid = props.get("client_id") ?: ""
+        def csec = props.get("client_secret") ?: ""
+        def uname = props.get("username") ?: "jewel+101@newroztech.com"
+        def pwd = props.get("password") ?: ""
+        if (cid &amp;&amp; csec &amp;&amp; uname &amp;&amp; pwd) {
+            def url = new URI(base + "/oauth/token").toURL()
+            def conn = (java.net.HttpURLConnection) url.openConnection()
+            conn.setRequestMethod("POST")
+            conn.setRequestProperty("Content-Type", "application/json")
+            conn.setRequestProperty("Accept", "application/json")
+            conn.setConnectTimeout(10000)
+            conn.setReadTimeout(20000)
+            conn.setDoOutput(true)
+            def payload = groovy.json.JsonOutput.toJson([
+                grant_type: "password",
+                client_id: cid,
+                client_secret: csec,
+                username: uname,
+                password: pwd
+            ])
+            conn.getOutputStream().write(payload.getBytes("UTF-8"))
+            int code = conn.getResponseCode()
+            if (code &gt;= 200 &amp;&amp; code &lt; 300) {
+                def respText = conn.getInputStream().getText("UTF-8")
+                def parsed = new groovy.json.JsonSlurper().parseText(respText)
+                if (parsed?.access_token) {
+                    props.put("shared_access_token", parsed.access_token)
+                    log.info("Successfully pre-fetched and shared OAuth access_token.")
+                }
+            } else {
+                log.warn("OAuth pre-fetch returned HTTP " + code + ". Workers will authenticate individually.")
+            }
+        }
+    } catch (Throwable t) {
+        log.warn("OAuth pre-fetch failed: " + t.getMessage() + ". Workers will authenticate individually.")
+    }
 }
 
 SampleResult.setResponseCode(missing.isEmpty() ? "200" : "500")
@@ -321,6 +361,21 @@ SampleResult.setResponseData("credential values are not stored in this sample", 
           <boolProp name="stopThread">false</boolProp>
           <stringProp name="variableNames">username</stringProp>
         </CSVDataSet>
+        <hashTree />
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Init token from shared" enabled="true">
+          <stringProp name="cacheKey">true</stringProp>
+          <stringProp name="filename" />
+          <stringProp name="parameters" />
+          <stringProp name="script">def token = vars.get("access_token")
+if (token == null || token.trim().isEmpty() || "NOT_FOUND".equals(token)) {
+    def shared = props.get("shared_access_token")
+    if (shared != null &amp;&amp; !shared.trim().isEmpty()) {
+        vars.put("access_token", shared)
+    }
+}
+SampleResult.setIgnore()</stringProp>
+          <stringProp name="scriptLanguage">groovy</stringProp>
+        </JSR223Sampler>
         <hashTree />
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Log in if no token" enabled="true">
           <stringProp name="IfController.condition">${__groovy(def t = vars.get("access_token"); t == null || "NOT_FOUND".equals(t) || t.trim().isEmpty())}</stringProp>
@@ -407,6 +462,8 @@ if (token == null || token.trim().isEmpty() || "NOT_FOUND".equals(token)) {
     prev.setSuccessful(false)
     prev.setResponseMessage("oauth/token response did not include access_token")
     prev.setStopThread(true)
+} else {
+    props.put("shared_access_token", token)
 }</stringProp>
           <stringProp name="scriptLanguage">groovy</stringProp>
         </JSR223PostProcessor>

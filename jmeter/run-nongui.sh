@@ -63,17 +63,20 @@ args+=(
   -o "${out}/dashboard"
 )
 
+cleanup() {
+  trap - EXIT INT TERM
+  if command -v python3 >/dev/null 2>&1; then
+    python3 generate-summary.py "${out}" || true
+  elif command -v python >/dev/null 2>&1; then
+    python generate-summary.py "${out}" || true
+  fi
+}
+trap cleanup EXIT INT TERM
+
 echo "Results: ${out}"
 set +e
 "${JMETER}" "${args[@]}" "$@"
 RC=$?
 set -e
-
-# Generate comprehensive summary report
-if command -v python3 >/dev/null 2>&1; then
-  python3 generate-summary.py "${out}" || true
-elif command -v python >/dev/null 2>&1; then
-  python generate-summary.py "${out}" || true
-fi
 
 exit "${RC}"
