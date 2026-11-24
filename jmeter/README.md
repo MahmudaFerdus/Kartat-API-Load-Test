@@ -67,7 +67,7 @@ run-nongui.cmd -q load-open-loop.properties -Jnum_threads=20 -Jduration=120 -Jth
 ./run-nongui.sh -q load-open-loop.properties -Jnum_threads=20 -Jduration=120 -JthreadGroupDuration=120
 ```
 
-A later `-q` or `-J` overrides the default 180/60 file. Results go to `results/<timestamp>/results.jtl` and `results/<timestamp>/dashboard/index.html`. The jtl stores status and URL, not request or response bodies.
+A later `-q` or `-J` overrides the default 180/60 file. Each run writes a new folder `results/yyyyMMdd-HHmmss` (`results\yyyyMMdd-HHmmss` on Windows) containing `results.jtl` and `dashboard/index.html`. If that folder already exists, the name gains `-1`, `-2`, and so on. The launcher does not reuse `results\run`. The jtl stores status and URL, not request or response bodies.
 
 ## Shapes and properties
 

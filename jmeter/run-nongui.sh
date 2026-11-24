@@ -16,8 +16,23 @@ if [[ ! -f secrets.properties ]]; then
 fi
 
 stamp="$(date +%Y%m%d-%H%M%S)"
-out="results/${stamp}"
-mkdir -p "${out}"
+mkdir -p results
+n=0
+while true; do
+  if [[ "${n}" -eq 0 ]]; then
+    out="results/${stamp}"
+  else
+    out="results/${stamp}-${n}"
+  fi
+  if mkdir "${out}" 2>/dev/null; then
+    break
+  fi
+  n=$((n + 1))
+  if [[ "${n}" -ge 100 ]]; then
+    echo "Could not create a new results folder for ${stamp}." >&2
+    exit 1
+  fi
+done
 
 args=(
   -n
