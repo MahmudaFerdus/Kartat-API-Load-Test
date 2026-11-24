@@ -32,7 +32,5 @@ See [jmeter/README.md](jmeter/README.md) for full documentation, GUI runs, open-
 | 116 | 1083 | Bundle |
 | 125 | 1089 | Bundle |
 | 125 | 1088 | Bundle |
-| 131 | 1068 | Bundle |
-| 131 | 1067 | Bundle |
-| 105 | 1072 | Bundle |
-| 124 | 1052 | Bundle |
+| 116 | 1074 | Bundle |
+| 125 | 1084 | Bundle |
