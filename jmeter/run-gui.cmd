@@ -19,7 +19,13 @@ if not exist "secrets.properties" (
 )
 
 set "QSECRETS="
-if exist "secrets.properties" set "QSECRETS=-q secrets.properties"
+if exist ".env" (
+  set "QSECRETS=-q .env"
+) else if exist "..\.env" (
+  set "QSECRETS=-q ..\.env"
+) else if exist "secrets.properties" (
+  set "QSECRETS=-q secrets.properties"
+)
 
 call "%JMETER%" -t kartat-gateway-purchase.jmx -q results-format.properties -q load-180-purchases-60-seconds.properties %QSECRETS% %*
 set "RC=%ERRORLEVEL%"

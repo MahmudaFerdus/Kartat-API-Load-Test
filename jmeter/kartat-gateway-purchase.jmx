@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Kartat gateway purchase" enabled="true">
@@ -7,9 +7,9 @@
       <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
       <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-        <collectionProp name="Arguments.arguments"/>
+        <collectionProp name="Arguments.arguments" />
       </elementProp>
-      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+      <stringProp name="TestPlan.user_define_classpath" />
     </TestPlan>
     <hashTree>
       <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="Accept JSON" enabled="true">
@@ -20,104 +20,109 @@
           </elementProp>
         </collectionProp>
       </HeaderManager>
-      <hashTree/>
+      <hashTree />
       <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
         <collectionProp name="Arguments.arguments">
           <elementProp name="base_url" elementType="Argument">
             <stringProp name="Argument.name">base_url</stringProp>
-            <stringProp name="Argument.value">${__P(base_url,https://dev-apigw.cardselling.cash)}</stringProp>
+            <stringProp name="Argument.value">${__P(base_url, ${__P(BASE_URL, https://dev-apigw.cardselling.cash)})}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="loadShape" elementType="Argument">
             <stringProp name="Argument.name">loadShape</stringProp>
-            <stringProp name="Argument.value">${__P(loadShape,fixed)}</stringProp>
+            <stringProp name="Argument.value">${__P(loadShape, ${__P(LOAD_SHAPE, open)})}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="totalPurchases" elementType="Argument">
             <stringProp name="Argument.name">totalPurchases</stringProp>
-            <stringProp name="Argument.value">${__P(totalPurchases,180)}</stringProp>
+            <stringProp name="Argument.value">${__P(totalPurchases, ${__P(TOTAL_PURCHASES, 0)})}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="duration" elementType="Argument">
             <stringProp name="Argument.name">duration</stringProp>
-            <stringProp name="Argument.value">${__P(duration,60)}</stringProp>
+            <stringProp name="Argument.value">${__P(duration, ${__P(DURATION, 420)})}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="drainSeconds" elementType="Argument">
             <stringProp name="Argument.name">drainSeconds</stringProp>
-            <stringProp name="Argument.value">${__P(drainSeconds,30)}</stringProp>
+            <stringProp name="Argument.value">${__P(drainSeconds, ${__P(DRAIN_SECONDS, 0)})}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="num_threads" elementType="Argument">
             <stringProp name="Argument.name">num_threads</stringProp>
-            <stringProp name="Argument.value">${__P(num_threads,30)}</stringProp>
+            <stringProp name="Argument.value">${__P(num_threads, ${__P(NUM_THREADS, 60)})}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="ramp_time" elementType="Argument">
             <stringProp name="Argument.name">ramp_time</stringProp>
-            <stringProp name="Argument.value">${__P(ramp_time,5)}</stringProp>
+            <stringProp name="Argument.value">${__P(ramp_time, ${__P(RAMP_TIME, 300)})}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="qty" elementType="Argument">
             <stringProp name="Argument.name">qty</stringProp>
-            <stringProp name="Argument.value">${__P(qty,1)}</stringProp>
+            <stringProp name="Argument.value">${__P(qty, ${__P(QTY, 1)})}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="sip" elementType="Argument">
             <stringProp name="Argument.name">sip</stringProp>
-            <stringProp name="Argument.value">${__P(sip,0662981885)}</stringProp>
+            <stringProp name="Argument.value">${__P(sip, ${__P(SIP, 0662981885)})}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="dealer_number" elementType="Argument">
             <stringProp name="Argument.name">dealer_number</stringProp>
-            <stringProp name="Argument.value">${__P(dealer_number,ABC123)}</stringProp>
+            <stringProp name="Argument.value">${__P(dealer_number, ${__P(DEALER_NUMBER, ABC123)})}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="asiacellMsisdn" elementType="Argument">
             <stringProp name="Argument.name">asiacellMsisdn</stringProp>
-            <stringProp name="Argument.value">${__P(asiacellMsisdn,9647706055187)}</stringProp>
+            <stringProp name="Argument.value">${__P(asiacellMsisdn, ${__P(ASIACELL_MSISDN, 9647706055187)})}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="connectTimeoutMs" elementType="Argument">
             <stringProp name="Argument.name">connectTimeoutMs</stringProp>
-            <stringProp name="Argument.value">${__P(connectTimeoutMs,3000)}</stringProp>
+            <stringProp name="Argument.value">${__P(connectTimeoutMs, ${__P(CONNECT_TIMEOUT_MS, 3000)})}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="responseTimeoutMs" elementType="Argument">
             <stringProp name="Argument.name">responseTimeoutMs</stringProp>
-            <stringProp name="Argument.value">${__P(responseTimeoutMs,50000)}</stringProp>
+            <stringProp name="Argument.value">${__P(responseTimeoutMs, ${__P(RESPONSE_TIMEOUT_MS, 50000)})}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="resellerCsv" elementType="Argument">
             <stringProp name="Argument.name">resellerCsv</stringProp>
-            <stringProp name="Argument.value">${__P(resellerCsv,data/reseller.csv)}</stringProp>
+            <stringProp name="Argument.value">${__P(resellerCsv, ${__P(RESELLER_CSV, data/reseller.csv)})}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="productsCsv" elementType="Argument">
             <stringProp name="Argument.name">productsCsv</stringProp>
-            <stringProp name="Argument.value">${__P(productsCsv,data/products.csv)}</stringProp>
+            <stringProp name="Argument.value">${__P(productsCsv, ${__P(PRODUCTS_CSV, data/products.csv)})}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="secretsFile" elementType="Argument">
             <stringProp name="Argument.name">secretsFile</stringProp>
-            <stringProp name="Argument.value">${__P(secretsFile,secrets.properties)}</stringProp>
+            <stringProp name="Argument.value">${__P(secretsFile, ${__P(SECRETS_FILE, secrets.properties)})}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="enablePurchaseThrottle" elementType="Argument">
             <stringProp name="Argument.name">enablePurchaseThrottle</stringProp>
-            <stringProp name="Argument.value">${__P(enablePurchaseThrottle,false)}</stringProp>
+            <stringProp name="Argument.value">${__P(enablePurchaseThrottle, ${__P(ENABLE_PURCHASE_THROTTLE, false)})}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="targetPurchaseTps" elementType="Argument">
             <stringProp name="Argument.name">targetPurchaseTps</stringProp>
-            <stringProp name="Argument.value">${__P(targetPurchaseTps,3)}</stringProp>
+            <stringProp name="Argument.value">${__P(targetPurchaseTps, ${__P(TARGET_PURCHASE_TPS, 3)})}</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="randomDealerNumber" elementType="Argument">
+            <stringProp name="Argument.name">randomDealerNumber</stringProp>
+            <stringProp name="Argument.value">${__P(randomDealerNumber, ${__P(RANDOM_DEALER_NUMBER, true)})}</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
       </Arguments>
-      <hashTree/>
+      <hashTree />
       <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="Load secrets" enabled="true">
-        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <stringProp name="ThreadGroup.on_sample_error">stoptestnow</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <stringProp name="LoopController.loops">1</stringProp>
@@ -125,61 +130,117 @@
         <stringProp name="ThreadGroup.num_threads">1</stringProp>
         <stringProp name="ThreadGroup.ramp_time">0</stringProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
-        <stringProp name="ThreadGroup.duration"></stringProp>
-        <stringProp name="ThreadGroup.delay"></stringProp>
+        <stringProp name="ThreadGroup.duration" />
+        <stringProp name="ThreadGroup.delay" />
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
       </SetupThreadGroup>
       <hashTree>
-        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Read secrets.properties" enabled="true">
+        <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Load .env and secrets" enabled="true">
           <stringProp name="cacheKey">true</stringProp>
-          <stringProp name="filename"></stringProp>
-          <stringProp name="parameters"></stringProp>
+          <stringProp name="filename" />
+          <stringProp name="parameters" />
           <stringProp name="script">import java.net.URI
 import org.apache.jmeter.services.FileServer
 
 def baseDir = new File(FileServer.getFileServer().getBaseDir() ?: ".")
-def secretsName = (props.get("secretsFile") ?: vars.get("secretsFile") ?: "secrets.properties").toString().trim()
-if (!secretsName) {
-    secretsName = "secrets.properties"
-}
-def secrets = new File(secretsName)
-if (!secrets.isAbsolute()) {
-    secrets = new File(baseDir, secretsName)
+
+def envCandidates = [
+    new File(baseDir, ".env"),
+    new File(baseDir.getParentFile(), ".env"),
+    new File(baseDir, "secrets.properties"),
+    new File(baseDir.getParentFile(), "secrets.properties")
+]
+
+def customFile = props.get("secretsFile") ?: vars.get("secretsFile")
+if (customFile != null &amp;&amp; customFile.toString().trim()) {
+    def f = new File(customFile.toString().trim())
+    if (!f.isAbsolute()) {
+        f = new File(baseDir, customFile.toString().trim())
+    }
+    envCandidates.add(0, f)
 }
 
+def keyAliases = [
+    "BASE_URL": "base_url",
+    "CLIENT_ID": "client_id",
+    "CLIENT_SECRET": "client_secret",
+    "PASSWORD": "password",
+    "NUM_THREADS": "num_threads",
+    "RAMP_TIME": "ramp_time",
+    "DURATION": "duration",
+    "DRAIN_SECONDS": "drainSeconds",
+    "THREAD_GROUP_DURATION": "threadGroupDuration",
+    "LOAD_SHAPE": "loadShape",
+    "TOTAL_PURCHASES": "totalPurchases",
+    "QTY": "qty",
+    "SIP": "sip",
+    "DEALER_NUMBER": "dealer_number",
+    "ASIACELL_MSISDN": "asiacellMsisdn",
+    "CONNECT_TIMEOUT_MS": "connectTimeoutMs",
+    "RESPONSE_TIMEOUT_MS": "responseTimeoutMs",
+    "RESELLER_CSV": "resellerCsv",
+    "PRODUCTS_CSV": "productsCsv",
+    "ENABLE_PURCHASE_THROTTLE": "enablePurchaseThrottle",
+    "TARGET_PURCHASE_TPS": "targetPurchaseTps",
+    "RANDOM_DEALER_NUMBER": "randomDealerNumber"
+]
+
 int filled = 0
-if (secrets.isFile()) {
-    secrets.eachLine("UTF-8") { line -&gt;
-        def raw = line.replace("\uFEFF", "").trim()
-        if (!raw || raw.startsWith("#") || raw.startsWith("!")) {
-            return
-        }
-        def eq = raw.indexOf("=")
-        if (eq &lt; 1) {
-            return
-        }
-        def key = raw.substring(0, eq).trim()
-        def value = raw.substring(eq + 1).trim()
-        def existing = props.get(key)
-        if (key &amp;&amp; (existing == null || existing.toString().trim().isEmpty())) {
-            props.put(key, value)
-            filled++
+def loadedFiles = []
+envCandidates.unique().each { f -&gt;
+    if (f != null &amp;&amp; f.isFile()) {
+        loadedFiles.add(f.getName())
+        f.eachLine("UTF-8") { line -&gt;
+            def raw = line.replace("﻿", "").trim()
+            if (!raw || raw.startsWith("#") || raw.startsWith("!")) {
+                return
+            }
+            if (raw.startsWith("export ")) {
+                raw = raw.substring(7).trim()
+            }
+            def eq = raw.indexOf("=")
+            if (eq &lt; 1) {
+                return
+            }
+            def key = raw.substring(0, eq).trim()
+            def value = raw.substring(eq + 1).trim()
+            if ((value.startsWith(""") &amp;&amp; value.endsWith(""")) || (value.startsWith("'") &amp;&amp; value.endsWith("'"))) {
+                if (value.length() &gt;= 2) {
+                    value = value.substring(1, value.length() - 1)
+                }
+            }
+            if (key) {
+                def targetKeys = [key]
+                if (keyAliases.containsKey(key)) {
+                    targetKeys.add(keyAliases[key])
+                }
+                targetKeys.add(key.toLowerCase())
+                targetKeys.unique().each { tKey -&gt;
+                    def existing = props.get(tKey)
+                    if (existing == null || existing.toString().trim().isEmpty()) {
+                        props.put(tKey, value)
+                        filled++
+                    }
+                }
+            }
         }
     }
-    log.info("Secrets file " + secrets.getName() + " filled " + filled + " empty properties. Existing -J and -q values were kept.")
+}
+if (!loadedFiles.isEmpty()) {
+    log.info("Configuration loaded from: " + loadedFiles.join(", ") + ". Filled " + filled + " properties.")
 } else {
-    log.warn("Secrets file not found at " + secrets.getAbsolutePath())
+    log.warn("No .env or secrets.properties file found.")
 }
 
 def missing = ["client_id", "client_secret", "password"].findAll { key -&gt;
-    def value = props.get(key)
+    def value = props.get(key) ?: props.get(key.toUpperCase())
     value == null || value.toString().trim().isEmpty()
 }
 missing.each { key -&gt;
-    log.error("Missing " + key + ". Put it in secrets.properties or pass -J" + key + " without printing the value.")
+    log.error("Missing " + key + ". Define it in .env or secrets.properties or pass -J" + key)
 }
 
-def rawBase = props.get("base_url")
+def rawBase = props.get("base_url") ?: props.get("BASE_URL")
 if (rawBase == null || rawBase.toString().trim().isEmpty()) {
     rawBase = vars.get("base_url")
 }
@@ -201,15 +262,15 @@ props.put("kartat_port", uri.port &gt; 0 ? String.valueOf(uri.port) : "")
 log.info("Gateway host " + uri.scheme + "://" + uri.host + (uri.port &gt; 0 ? ":" + uri.port : ""))
 
 if (props.get("threadGroupDuration") == null || props.get("threadGroupDuration").toString().trim().isEmpty()) {
-    def shape = props.get("loadShape")
+    def shape = props.get("loadShape") ?: props.get("LOAD_SHAPE")
     if (shape == null || shape.toString().trim().isEmpty()) {
         shape = vars.get("loadShape") ?: "fixed"
     }
-    def duration = props.get("duration")
+    def duration = props.get("duration") ?: props.get("DURATION")
     if (duration == null || duration.toString().trim().isEmpty()) {
         duration = vars.get("duration") ?: "60"
     }
-    def drain = props.get("drainSeconds")
+    def drain = props.get("drainSeconds") ?: props.get("DRAIN_SECONDS")
     if (drain == null || drain.toString().trim().isEmpty()) {
         drain = vars.get("drainSeconds") ?: "30"
     }
@@ -220,13 +281,20 @@ if (props.get("threadGroupDuration") == null || props.get("threadGroupDuration")
     log.info("threadGroupDuration=" + scheduled + " for loadShape=" + shape)
 }
 
+if (!missing.isEmpty()) {
+    SampleResult.setStopTestNow(true)
+    try {
+        org.apache.jmeter.threads.JMeterContextService.getContext().getEngine().stopTest(true)
+    } catch (Throwable ignored) {}
+}
+
 SampleResult.setResponseCode(missing.isEmpty() ? "200" : "500")
 SampleResult.setSuccessful(missing.isEmpty())
-SampleResult.setResponseMessage(missing.isEmpty() ? "secrets ready" : ("missing " + missing.join(",")))
+SampleResult.setResponseMessage(missing.isEmpty() ? "configuration ready" : ("missing " + missing.join(",")))
 SampleResult.setResponseData("credential values are not stored in this sample", "UTF-8")</stringProp>
           <stringProp name="scriptLanguage">groovy</stringProp>
         </JSR223Sampler>
-        <hashTree/>
+        <hashTree />
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Purchase workers" enabled="true">
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -237,7 +305,7 @@ SampleResult.setResponseData("credential values are not stored in this sample", 
         <stringProp name="ThreadGroup.num_threads">${num_threads}</stringProp>
         <stringProp name="ThreadGroup.ramp_time">${ramp_time}</stringProp>
         <boolProp name="ThreadGroup.scheduler">true</boolProp>
-        <stringProp name="ThreadGroup.duration">${__P(threadGroupDuration,90)}</stringProp>
+        <stringProp name="ThreadGroup.duration">${__P(threadGroupDuration, ${__P(THREAD_GROUP_DURATION, 420)})}</stringProp>
         <stringProp name="ThreadGroup.delay">0</stringProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
       </ThreadGroup>
@@ -253,8 +321,12 @@ SampleResult.setResponseData("credential values are not stored in this sample", 
           <boolProp name="stopThread">false</boolProp>
           <stringProp name="variableNames">username</stringProp>
         </CSVDataSet>
-        <hashTree/>
-        <OnceOnlyController guiclass="OnceOnlyControllerGui" testclass="OnceOnlyController" testname="Log in once" enabled="true"/>
+        <hashTree />
+        <IfController guiclass="IfControllerPanel" testclass="IfController" testname="Log in if no token" enabled="true">
+          <stringProp name="IfController.condition">${__groovy(def t = vars.get("access_token"); t == null || "NOT_FOUND".equals(t) || t.trim().isEmpty())}</stringProp>
+          <boolProp name="IfController.evaluateAll">false</boolProp>
+          <boolProp name="IfController.useExpression">true</boolProp>
+        </IfController>
         <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="oauth/token" enabled="true">
           <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
@@ -270,14 +342,14 @@ SampleResult.setResponseData("credential values are not stored in this sample", 
               <elementProp name="client_id" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.name">client_id</stringProp>
-                <stringProp name="Argument.value">${__P(client_id)}</stringProp>
+                <stringProp name="Argument.value">${__P(client_id, ${__P(CLIENT_ID,)})}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
               <elementProp name="client_secret" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.name">client_secret</stringProp>
-                <stringProp name="Argument.value">${__P(client_secret)}</stringProp>
+                <stringProp name="Argument.value">${__P(client_secret, ${__P(CLIENT_SECRET,)})}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
@@ -291,7 +363,7 @@ SampleResult.setResponseData("credential values are not stored in this sample", 
               <elementProp name="password" elementType="HTTPArgument">
                 <boolProp name="HTTPArgument.always_encode">false</boolProp>
                 <stringProp name="Argument.name">password</stringProp>
-                <stringProp name="Argument.value">${__P(password)}</stringProp>
+                <stringProp name="Argument.value">${__P(password, ${__P(PASSWORD,)})}</stringProp>
                 <stringProp name="Argument.metadata">=</stringProp>
                 <boolProp name="HTTPArgument.use_equals">true</boolProp>
               </elementProp>
@@ -314,7 +386,7 @@ SampleResult.setResponseData("credential values are not stored in this sample", 
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
           <boolProp name="HTTPSampler.DO_MULTIPART_POST">true</boolProp>
-          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.embedded_url_re" />
           <stringProp name="HTTPSampler.connect_timeout">${connectTimeoutMs}</stringProp>
           <stringProp name="HTTPSampler.response_timeout">${responseTimeoutMs}</stringProp>
         </HTTPSamplerProxy>
@@ -325,11 +397,11 @@ SampleResult.setResponseData("credential values are not stored in this sample", 
               <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
               <stringProp name="JSONPostProcessor.defaultValues">NOT_FOUND</stringProp>
             </JSONPostProcessor>
-            <hashTree/>
+            <hashTree />
         <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Require access_token" enabled="true">
           <stringProp name="cacheKey">true</stringProp>
-          <stringProp name="filename"></stringProp>
-          <stringProp name="parameters"></stringProp>
+          <stringProp name="filename" />
+          <stringProp name="parameters" />
           <stringProp name="script">def token = vars.get("access_token")
 if (token == null || token.trim().isEmpty() || "NOT_FOUND".equals(token)) {
     prev.setSuccessful(false)
@@ -338,7 +410,7 @@ if (token == null || token.trim().isEmpty() || "NOT_FOUND".equals(token)) {
 }</stringProp>
           <stringProp name="scriptLanguage">groovy</stringProp>
         </JSR223PostProcessor>
-            <hashTree/>
+            <hashTree />
           </hashTree>
         </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If access token" enabled="true">
@@ -349,8 +421,8 @@ if (token == null || token.trim().isEmpty() || "NOT_FOUND".equals(token)) {
         <hashTree>
         <JSR223Sampler guiclass="TestBeanGUI" testclass="JSR223Sampler" testname="Schedule purchase" enabled="true">
           <stringProp name="cacheKey">true</stringProp>
-          <stringProp name="filename"></stringProp>
-          <stringProp name="parameters"></stringProp>
+          <stringProp name="filename" />
+          <stringProp name="parameters" />
           <stringProp name="script">import org.apache.jmeter.services.FileServer
 
 def propOrVar = { String key, String fallback -&gt;
@@ -449,6 +521,11 @@ try {
         long waitMs = target - System.currentTimeMillis()
         if (waitMs &gt; 0L) {
             Thread.sleep(waitMs)
+        } else {
+            double intervalMs = (duration * 1000.0d) / total
+            if (Math.abs(waitMs) &gt; intervalMs * 2) {
+                log.warn("Purchase schedule lagging behind target by " + Math.abs(waitMs) + "ms at slot " + slot + ". Consider increasing num_threads or check server latency.")
+            }
         }
         vars.put("purchaseSlot", String.valueOf(slot))
     } else {
@@ -557,6 +634,24 @@ try {
             vars.put("product_name", (row.product_name ?: rowName).toString())
             vars.put("bundle_name", rowName)
             vars.put("msisdn", msisdn)
+
+            def rowDealer = (row.dealer_number ?: "").toString().trim()
+            if (rowDealer) {
+                vars.put("dealer_number", rowDealer)
+            } else {
+                def randomDealerSetting = propOrVar("randomDealerNumber", "true")
+                def configuredDealer = propOrVar("dealer_number", "")
+                if (!configuredDealer || "random".equalsIgnoreCase(configuredDealer) || "true".equalsIgnoreCase(randomDealerSetting)) {
+                    def chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    def digits = "0123456789"
+                    def r = java.util.concurrent.ThreadLocalRandom.current()
+                    def prefix = (0..2).collect { chars.charAt(r.nextInt(chars.length())) }.join()
+                    def num = (0..2).collect { digits.charAt(r.nextInt(digits.length())) }.join()
+                    vars.put("dealer_number", prefix + num)
+                } else {
+                    vars.put("dealer_number", configuredDealer)
+                }
+            }
         }
     }
     if (rows == null || rows.isEmpty()) {
@@ -583,7 +678,7 @@ try {
 return null</stringProp>
           <stringProp name="scriptLanguage">groovy</stringProp>
         </JSR223Sampler>
-          <hashTree/>
+          <hashTree />
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If purchase slot reserved" enabled="true">
           <stringProp name="IfController.condition">${__groovy("false".equals(vars.get("skipPurchase")))}</stringProp>
           <boolProp name="IfController.evaluateAll">false</boolProp>
@@ -592,7 +687,7 @@ return null</stringProp>
           <hashTree>
             <TransactionController guiclass="TransactionControllerGui" testclass="TransactionController" testname="purchase ${operator_id}-${bundle_id}" enabled="true">
               <boolProp name="TransactionController.includeTimers">false</boolProp>
-              <boolProp name="TransactionController.parent">true</boolProp>
+              <boolProp name="TransactionController.parent">false</boolProp>
             </TransactionController>
             <hashTree>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="purchase validate ${operator_id}-${bundle_id}" enabled="true">
@@ -653,7 +748,7 @@ return null</stringProp>
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
           <boolProp name="HTTPSampler.DO_MULTIPART_POST">true</boolProp>
-          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.embedded_url_re" />
           <stringProp name="HTTPSampler.connect_timeout">${connectTimeoutMs}</stringProp>
           <stringProp name="HTTPSampler.response_timeout">${responseTimeoutMs}</stringProp>
         </HTTPSamplerProxy>
@@ -666,12 +761,15 @@ return null</stringProp>
               </elementProp>
             </collectionProp>
           </HeaderManager>
-          <hashTree/>
+          <hashTree />
         <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Read validate status" enabled="true">
           <stringProp name="cacheKey">true</stringProp>
-          <stringProp name="filename"></stringProp>
-          <stringProp name="parameters"></stringProp>
+          <stringProp name="filename" />
+          <stringProp name="parameters" />
           <stringProp name="script">vars.put("validateOk", "false")
+if ("401".equals(prev.getResponseCode())) {
+    vars.remove("access_token")
+}
 try {
     def text = prev.getResponseDataAsString()
     if (text != null &amp;&amp; text.trim().startsWith("{")) {
@@ -689,7 +787,7 @@ if (!"true".equals(vars.get("validateOk"))) {
 }</stringProp>
           <stringProp name="scriptLanguage">groovy</stringProp>
         </JSR223PostProcessor>
-                <hashTree/>
+                <hashTree />
               </hashTree>
         <IfController guiclass="IfControllerPanel" testclass="IfController" testname="If validate status true" enabled="true">
           <stringProp name="IfController.condition">${__groovy("true".equals(vars.get("validateOk")))}</stringProp>
@@ -762,7 +860,7 @@ if (!"true".equals(vars.get("validateOk"))) {
           <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
           <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
           <boolProp name="HTTPSampler.DO_MULTIPART_POST">true</boolProp>
-          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+          <stringProp name="HTTPSampler.embedded_url_re" />
           <stringProp name="HTTPSampler.connect_timeout">${connectTimeoutMs}</stringProp>
           <stringProp name="HTTPSampler.response_timeout">${responseTimeoutMs}</stringProp>
         </HTTPSamplerProxy>
@@ -775,12 +873,15 @@ if (!"true".equals(vars.get("validateOk"))) {
               </elementProp>
             </collectionProp>
           </HeaderManager>
-          <hashTree/>
+          <hashTree />
         <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Read execute status" enabled="true">
           <stringProp name="cacheKey">true</stringProp>
-          <stringProp name="filename"></stringProp>
-          <stringProp name="parameters"></stringProp>
-          <stringProp name="script">def ok = false
+          <stringProp name="filename" />
+          <stringProp name="parameters" />
+          <stringProp name="script">if ("401".equals(prev.getResponseCode())) {
+    vars.remove("access_token")
+}
+def ok = false
 try {
     def text = prev.getResponseDataAsString()
     if (text != null &amp;&amp; text.trim().startsWith("{")) {
@@ -796,7 +897,7 @@ if (!ok) {
 }</stringProp>
           <stringProp name="scriptLanguage">groovy</stringProp>
         </JSR223PostProcessor>
-                  <hashTree/>
+                  <hashTree />
                 </hashTree>
               </hashTree>
             </hashTree>
@@ -837,9 +938,9 @@ if (!ok) {
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename"></stringProp>
+          <stringProp name="filename" />
       </ResultCollector>
-      <hashTree/>
+      <hashTree />
       <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="false">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
           <objProp>
@@ -874,9 +975,9 @@ if (!ok) {
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename"></stringProp>
+          <stringProp name="filename" />
       </ResultCollector>
-      <hashTree/>
+      <hashTree />
     </hashTree>
   </hashTree>
 </jmeterTestPlan>

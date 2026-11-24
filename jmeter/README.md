@@ -14,15 +14,51 @@ The token and purchase bodies are multipart form fields, matching the Postman re
 
 Install Apache JMeter 5.6 (or newer) and set `JMETER_HOME`, or put `jmeter` on `PATH`.
 
+Copy `.env.example` to `.env` (either in the project root or in `jmeter/`):
+
 ```bash
-cp secrets.properties.example secrets.properties
+cp .env.example .env
 ```
 
-Fill `client_id`, `client_secret`, and `password` in `secrets.properties`. That file is gitignored. The same file is picked up when you start from the GUI and when you run headless. Do not commit it, and do not enable response-body logging: the token request contains the password and client secret.
+Configure `CLIENT_ID`, `CLIENT_SECRET`, and `PASSWORD` in `.env`. You can also configure all load and purchase parameters (`NUM_THREADS`, `RAMP_TIME`, `DURATION`, `BASE_URL`, etc.) directly in `.env`.
 
-JMeter writes every `-J` value into `jmeter.log`. Keep `client_secret` and `password` in `secrets.properties`. The setup thread loads that file and does not write the values into the log.
+> [!NOTE]
+> `.env` is gitignored. The test plan automatically checks for `.env` (in current and parent directory) and falls back to `secrets.properties` if present.
 
-The reseller username is `jewel+101@newroztech.com` in `data/reseller.csv`.
+## Finding Bottlenecks (2-Core CPU / 4GB RAM Server)
+
+To discover the maximum throughput, latency breakpoint, and resource exhaustion point on a **2-Core CPU / 4GB RAM** target server:
+
+```bash
+./run-bottleneck-test.sh
+```
+
+Or on Windows:
+
+```bat
+run-bottleneck-test.cmd
+```
+
+### How the Bottleneck Test Works:
+1. **Concurrency Ramp:** Smoothly ramps active users from 1 to 60 over 5 minutes (300 seconds), adding 1 new concurrent user every 5 seconds.
+2. **Saturation Hold:** Sustains peak load for an additional 2 minutes (120 seconds).
+3. **Automated Summary Report:** Instantly prints an executive summary table to the terminal upon completion and saves a formatted `summary.md` inside the results folder.
+4. **Interactive HTML Dashboard:** Generates complete charts and telemetry in `results/bottleneck-YYYYMMDD-HHMMSS/dashboard/`.
+
+### What to Monitor on the Target Server:
+Run the lightweight monitor script directly on the target server during the test:
+```bash
+chmod +x server-monitor.sh
+./server-monitor.sh > server-metrics.csv
+```
+This logs CPU (%usr, %sys, %wa, %id), Memory, Swap, Load Average, and TCP connection counts every second.
+
+### Interpreting the Bottleneck:
+Open `dashboard/index.html` in your browser:
+- **Throughput Plateau (Max Capacity):** Check **Transactions Per Second (TPS)** vs **Active Threads Over Time**. Note the thread count where TPS stops growing and flatlines. On a 2-core machine, this typically happens between 15–40 concurrent users.
+- **Queueing Latency (Knee of the Curve):** In **Response Times Over Time**, identify where latency jumps exponentially (e.g. from 200ms to 2,000ms+). That point is your safe operational ceiling.
+- **Errors & Timeouts:** In **Response Codes Over Time**, identify when HTTP 502/504 errors or connection timeouts begin appearing.
+- **Correlating Server Metrics:** If CPU Idle hits `0%` with high User%, the bottleneck is compute (application logic / hashing / serialization). If CPU IOWait (`%wa`) spikes or Swap usage climbs above 0MB, the 4GB RAM limit was reached and the database/OS began disk thrashing.
 
 ## GUI
 

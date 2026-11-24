@@ -45,11 +45,29 @@ goto newdir
 
 :rundir
 set "QSECRETS="
-if exist "secrets.properties" set "QSECRETS=-q secrets.properties"
+if exist ".env" (
+  set "QSECRETS=-q .env"
+) else if exist "..\.env" (
+  set "QSECRETS=-q ..\.env"
+) else if exist "secrets.properties" (
+  set "QSECRETS=-q secrets.properties"
+)
 
 echo Results: %OUT%
 call "%JMETER%" -n -t kartat-gateway-purchase.jmx -q results-format.properties -q load-180-purchases-60-seconds.properties %QSECRETS% -l "%OUT%\results.jtl" -j "%OUT%\jmeter.log" -e -o "%OUT%\dashboard" %*
 set "RC=%ERRORLEVEL%"
+
+rem Generate comprehensive summary report
+where python >nul 2>nul
+if %ERRORLEVEL%==0 (
+  python generate-summary.py "%OUT%"
+) else (
+  where python3 >nul 2>nul
+  if %ERRORLEVEL%==0 (
+    python3 generate-summary.py "%OUT%"
+  )
+)
+
 if not "%RC%"=="0" pause
 exit /b %RC%
 

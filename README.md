@@ -2,7 +2,25 @@
 
 JMeter plan for the Kartat gateway purchase flow: `POST /oauth/token`, `POST /api/v1/stock/purchase/validate`, and `POST /api/v1/stock/purchase/execute`.
 
-See [jmeter/README.md](jmeter/README.md) for GUI and headless runs.
+## Quick Start (.env)
+
+1. Copy `.env.example` to `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+2. Fill in `CLIENT_ID`, `CLIENT_SECRET`, and `PASSWORD`.
+3. Run the **2-Core / 4GB RAM Bottleneck Test**:
+   ```bash
+   cd jmeter
+   ./run-bottleneck-test.sh
+   ```
+   Or on Windows:
+   ```cmd
+   cd jmeter
+   run-bottleneck-test.cmd
+   ```
+
+See [jmeter/README.md](jmeter/README.md) for full documentation, GUI runs, open-loop profiles, and server monitoring guide.
 
 ## Catalog rows
 
